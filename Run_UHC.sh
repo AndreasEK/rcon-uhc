@@ -7,8 +7,7 @@ export SPAWN_Y=65
 export SPAWN_Z=0
 export INTRO_LENGTH_MIN=3
 export EPISODE_LENGTH_MIN=20
-export MCRCON_HOME=/Minecraft/mcrcon
-echo "title @a subtitle {\"text\":\"Zeit für das Intro\"}" "title @a title {\"text\":\"Start in $INTRO_LENGTH_MIN Minute(n)\"}" "worldborder center $SPAWN_X $SPAWN_Z" "worldborder set 1500" "spreadplayers $SPAWN_X $SPAWN_Z 100 650 true @a" "effect @a minecraft:instant_health 5"
+export MCRCON_HOME=~/Minecraft/mcrcon
 $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"Zeit für das Intro\"}" "title @a title {\"text\":\"Start in $INTRO_LENGTH_MIN Minute(n)\"}" "worldborder center $SPAWN_X $SPAWN_Z" "worldborder set 1500" "spreadplayers $SPAWN_X $SPAWN_Z 100 650 true @a" "effect @a minecraft:instant_health 5"
 sleep $(($INTRO_LENGTH_MIN * 60))
 $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "gamerule naturalRegeneration false" "effect @a minecraft:instant_health 5" "gamemode 0 @a" "gamerule doDaylightCycle true" "time set 23500" "clear @a"
