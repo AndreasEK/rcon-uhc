@@ -1,56 +1,87 @@
 #!/bin/sh
-export SERVER_IP=localhost
-export PASSWD=YOUR_RCON_PASSWORD
-export SPAWN_X=0
-#make sure you don't spawn in a wall or in the air
-export SPAWN_Y=65 
-export SPAWN_Z=0
-export INTRO_LENGTH_MIN=3
-export EPISODE_LENGTH_MIN=20
-export MCRCON_HOME=~/Minecraft/mcrcon
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"Zeit für das Intro\"}" "title @a title {\"text\":\"Start in $INTRO_LENGTH_MIN Minute(n)\"}" "worldborder center $SPAWN_X $SPAWN_Z" "worldborder set 1500" "spreadplayers $SPAWN_X $SPAWN_Z 100 650 true @a" "effect @a minecraft:instant_health 5"
-sleep $(($INTRO_LENGTH_MIN * 60))
+
+#Server connection
+SERVER_IP=localhost
+PASSWD=YOUR_RCON_PASSWORD
+MCRCON_HOME=~/Minecraft/mcrcon
+
+#Spawn and Worldborder
+SPAWN_X=0
+SPAWN_Y=65 #make sure you don't spawn in a wall or in the air
+SPAWN_Z=0
+WORLDBORDER_START=1500
+WORLDBORDER_END=20
+
+#Timings & Events
+INTRO_LENGTH_MIN=3
+EPISODE_LENGTH_MIN=20
+NUMBER_OF_EPISODES=10
+SHRINK_AT_EPISODE=5
+NOON_AT_EPISODE=10
+
+
+#just for debugging
+SECS_PER_MIN=60
+EFFECT_WAIT=30
+
+#INTRO - SET WORLD BORDER - SPREAD PLAYERS
+$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"Zeit für das Intro\"}" "title @a title {\"text\":\"Start in $INTRO_LENGTH_MIN Minuten\"}" "worldborder center $SPAWN_X $SPAWN_Z" "worldborder set $WORLDBORDER_START" "spreadplayers $SPAWN_X $SPAWN_Z 100 $(($WORLDBORDER_START / 2 - 100)) true @a" "effect @a minecraft:instant_health 5"
+#sleep $(($INTRO_LENGTH_MIN * 60))
+
+#SETUP THE GAME
 $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "gamerule naturalRegeneration false" "effect @a minecraft:instant_health 5" "gamemode 0 @a" "gamerule doDaylightCycle true" "time set 23500" "clear @a"
+
+#COUNTDOWN
 #configure titles to show only for one second
 $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a times 0 0 20"
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"5\"}"
-sleep 1
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"4\"}"
-sleep 1
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"3\"}"
-sleep 1
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"2\"}"
-sleep 1
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"1\"}"
-sleep 1
+for countdown in {5..1}
+do
+  $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"$countdown\"}"
+  sleep 1
+done
 #reset title to default lengths
 $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a reset"
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"EPISODE 1\"}"
-sleep $(($EPISODE_LENGTH_MIN * 60))
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"$EPISODE_LENGTH_MIN Minuten\"}" "title @a title {\"text\":\"EPISODE 2\"}"
-sleep $(($EPISODE_LENGTH_MIN * 60))
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"$(($EPISODE_LENGTH_MIN * 2)) Minuten\"}" "title @a title {\"text\":\"EPISODE 3\"}"
-sleep $(($EPISODE_LENGTH_MIN * 60))
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"$(($EPISODE_LENGTH_MIN * 3)) Minuten\"}" "title @a title {\"text\":\"EPISODE 4\"}"
-sleep 30
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "worldborder set 20 3600" "title @a subtitle {\"text\":\"Auf 20x20 in einer Stunde.\"}" "title @a title {\"text\":\"DIE WELT WIRD KLEINER\"}"
-sleep $(($EPISODE_LENGTH_MIN * 60 - 30))
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"$(($EPISODE_LENGTH_MIN * 4)) Minuten\"}" "title @a title {\"text\":\"EPISODE 5\"}"
-sleep $EPISODE_LENGTH
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"$(($EPISODE_LENGTH_MIN * 5)) Minuten\"}" "title @a title {\"text\":\"EPISODE 6\"}"
-sleep 30
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "gamerule doDaylightCycle false" "time set 6000" "title @a subtitle {\"text\":\"Ab jetzt ist es immer 12 Uhr mittags!\"}" "title @a title {\"text\":\"HIGH NOON\"}"
-sleep $(($EPISODE_LENGTH_MIN * 60 - 30))
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"$(($EPISODE_LENGTH_MIN * 6)) Minuten\"}" "title @a title {\"text\":\"EPISODE 7\"}"
-sleep $(($EPISODE_LENGTH_MIN * 60))
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"$(($EPISODE_LENGTH_MIN * 7)) Minuten\"}" "title @a title {\"text\":\"EPISODE 8\"}"
-sleep $(($EPISODE_LENGTH_MIN * 60))
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"$(($EPISODE_LENGTH_MIN * 8)) Minuten\"}" "title @a title {\"text\":\"EPISODE 9\"}"
-sleep $(($EPISODE_LENGTH_MIN * 60))
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"$(($EPISODE_LENGTH_MIN * 9)) Minuten\"}" "title @a title {\"text\":\"EPISODE 10\"}"
-sleep $(($EPISODE_LENGTH_MIN * 60))
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"$(($EPISODE_LENGTH_MIN * 10)) Minuten\"}" "title @a title {\"text\":\"EPISODE 11\"}"
-sleep $(($EPISODE_LENGTH_MIN * 60))
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"$(($EPISODE_LENGTH_MIN * 11)) Minuten\"}" "title @a title {\"text\":\"EPISODE 12\"}"
-sleep $(($EPISODE_LENGTH_MIN * 60))
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"$(($EPISODE_LENGTH_MIN * 12)) Minuten\"}" "title @a title {\"text\":\"EPISODE 13\"}"
+
+#EPISODE MARKERS
+for episode in $(seq 1 $NUMBER_OF_EPISODES)
+do
+   echo "Episode $episode"
+   $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"EPISODE $episode\"}"
+   if [ $episode -ne 1 ]
+   then
+      $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"$EPISODE_LENGTH_MIN Minuten\"}"
+   fi
+
+   episode_effect_wait=0
+   #Shrink border
+   if [ $episode -eq $SHRINK_AT_EPISODE ]
+   then
+      echo "WORLD SHRINKS"
+      #apply effect
+      worldborder_shrink_min=$(( ($NUMBER_OF_EPISODES - $SHRINK_AT_EPISODE + 1) * $EPISODE_LENGTH_MIN ))
+      echo "shrinking border for $worldborder_shrink_min minutes"
+      $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "worldborder set 20 $(( $worldborder_shrink_min * $SECS_PER_MIN ))" 
+      
+      #wait a little to update title to players
+      episode_effect_wait=$EFFECT_WAIT
+      sleep $EFFECT_WAIT
+      $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"Auf ${WORLDBORDER_END}x${WORLDBORDER_END} in $(( $worldborder_shrink_min )) Minuten.\"}" "title @a title {\"text\":\"DIE WELT WIRD KLEINER\"}"
+   fi
+   
+   #High Noon
+   if [ $episode -eq $NOON_AT_EPISODE ]
+   then
+      echo "HIGH NOON"
+      #apply effect
+      clear_weather_min=$(( ($NUMBER_OF_EPISODES - $NOON_AT_EPISODE + 1) * $EPISODE_LENGTH_MIN ))
+      echo "clearing weather for $clear_weather_min minutes"
+      $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "gamerule doDaylightCycle false" "time set 6000" "weather clear $(( $clear_weather_min * $SECS_PER_MIN ))" 
+      
+      #wait a little to update title to players
+      episode_effect_wait=$EFFECT_WAIT
+      sleep $EFFECT_WAIT
+      $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"Ab jetzt ist es immer 12 Uhr mittags!\"}" "title @a title {\"text\":\"HIGH NOON\"}"
+   fi
+   
+   sleep $(($EPISODE_LENGTH_MIN * $SECS_PER_MIN - $episode_effect_wait)) 
+done
