@@ -49,7 +49,7 @@ do
    $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"EPISODE $episode\"}"
    if [ $episode -ne 1 ]
    then
-      $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"$EPISODE_LENGTH_MIN Minuten\"}"
+      $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"${{$EPISODE_LENGTH_MIN * $episode}} Minuten\"}"
    fi
 
    episode_effect_wait=0
