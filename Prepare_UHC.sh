@@ -7,7 +7,7 @@ MCRCON_HOME=~/Minecraft/mcrcon
 
 #Spawn and Worldborder
 SPAWN_X=0
-SPAWN_Y=65 #make sure you don't spawn in a wall or in the air
+SPAWN_Y=75 #make sure you don't spawn in a wall or in the air
 SPAWN_Z=0
 
 $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "gamerule sendCommandFeedback false"
