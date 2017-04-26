@@ -1,12 +1,12 @@
 #!/bin/sh
 source env.sh
 
-sleep $(( $EFFECT_WAIT - 15 ))
+sleep $(( $EFFECT_WAIT - 10 ))
 
 echo "EVENT: Güldene Äpfel"
 $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"Güldene Äpfel\", \"color\":\"yellow\"}" "title @a subtitle {\"text\":\"Ein goldener Apfel für einen Spieler pro Team\"}"
 
-sleep 10
+sleep 5
 
 ./countdown.sh
 
