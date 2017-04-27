@@ -6,6 +6,8 @@ sleep $EFFECT_WAIT
 echo "EVENT: Flip flop!"
 $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"Flip flop!\", \"color\":\"red\"}" "title @a subtitle {\"text\":\"Zwei Teams wechseln ihre Positionen...\"}"
 
+sleep $EFFECT_WAIT
+
 #
 # Teams zufsallig auswaehlen
 #

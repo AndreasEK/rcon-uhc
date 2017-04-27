@@ -6,6 +6,8 @@ sleep $EFFECT_WAIT
 echo "EVENT: Bad Armour"
 $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"Bad Armour\", \"color\":\"red\"}" "title @a subtitle {\"text\":\"Ein Spieler bekommt einen ziemlich blöden Brustpanzer.\"}"
 
+sleep $EFFECT_WAIT
+
 # Gibt einem Spieler eine verwunschene und recht stark abgenutze Diamant-Brustplate,
 # die nicht abgelegt werden kann (curse of binding) und bei Tod verschwindet
 # (curse of vanishing).
