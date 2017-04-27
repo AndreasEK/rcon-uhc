@@ -11,10 +11,17 @@ sleep $EFFECT_WAIT
 #
 # Teams zufsallig auswaehlen
 #
-team_a = ""
-team_b = ""
+teams=(blue gold green aqua red yellow light_purple dark_blue)
+RANDOM=$$$(date +%s) # Seed random generator
 
-for team in blue gold green aqua red yellow light_purple dark_blue
+team_a=""
+team_b=""
+# randomly select _different_ teams
+while [ $team_a = $team_b ]
+do
+    team_a=${teams[$RANDOM % ${#teams[@]} ]}
+    team_b=${teams[$RANDOM % ${#teams[@]} ]}
+done
 
 # Summon invisible armour stand to team A
 execute @p[team=$team_a] ~ ~ ~ summon ArmorStand ~ ~ ~ {Invisible:1,Invulnerable:1,Marker:1,NoGravity:1,NoAI:1,tags=["swap"]}
