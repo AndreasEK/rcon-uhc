@@ -1,10 +1,10 @@
 #!/bin/bash
 
 ############################################################
-#                 Event_2_Golden_Apples.sh                 #
+#                 Event_3_Death_All_Mobs.sh                #
 #                                                          #
-# Give one randomly picked player per team a golden apple. #
-# plate with some bad, hampering statistics.               #
+# All mobs within a radius of 20 blocks around each player #
+# are killed - leaving xp points behind for pickup. :)     #
 #                                                          #
 # No arguments to the script.                              #
 #                                                          #
@@ -25,5 +25,8 @@ subtitle="Alle Mobs im Umkreis von 20 Blöcken um jeden Spieler sterben!"
 # countdown 5 seconds
 ./countdown.sh 5
 
+#
+# run the event
+#
 $RCON_CMD "/execute @a[type=player,m=0] ~ ~ ~ /kill @e[type=!player,r=20]"
 

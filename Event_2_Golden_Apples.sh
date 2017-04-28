@@ -4,7 +4,6 @@
 #                 Event_2_Golden_Apples.sh                 #
 #                                                          #
 # Give one randomly picked player per team a golden apple. #
-# plate with some bad, hampering statistics.               #
 #                                                          #
 # No arguments to the script.                              #
 #                                                          #
@@ -25,7 +24,9 @@ subtitle="Ein goldener Apfel für einen Spieler pro Team"
 # countdown 5 seconds
 ./countdown.sh 5
 
+#
 # run the event
+#
 for team in $TEAMS
 do
 	$RCON_CMD "give @r[team=$team,m=0] golden_apple"
