@@ -3,10 +3,10 @@ source env.sh
 
 sleep $(( $EFFECT_WAIT - 10 ))
 
-echo "EVENT: Schneller!"
+echo "EVENT: Unsichtbarkeit!"
 
-title=Schneller!
-subtitle="Ein Teamspieler ist einen Tag lang schneller"
+title=Huch!
+subtitle="Alle Spieler sind 10 Minuten unsichtbar"
 $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"$title\", \"color\":\"green\"}" "title @a subtitle {\"text\":\"$subtitle\"}"
 
 sleep 5
@@ -15,5 +15,5 @@ sleep 5
 
 for team in blue gold green aqua red yellow light_purple dark_blue
 do
-	$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "effect @r[team=$team,m=0] minecraft:speed 1200 2"
+	$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "effect @a[team=$team,m=0] minecraft:invisibility 6000 2"
 done
