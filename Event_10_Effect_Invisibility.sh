@@ -15,5 +15,5 @@ sleep 5
 
 for team in blue gold green aqua red yellow light_purple dark_blue
 do
-	$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "effect @a[team=$team,m=0] minecraft:invisibility 6000 2"
+	$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "effect @a[team=$team,m=0] minecraft:invisibility 600 2"
 done

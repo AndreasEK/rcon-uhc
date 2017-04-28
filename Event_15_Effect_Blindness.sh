@@ -5,7 +5,7 @@ sleep $(( $EFFECT_WAIT - 10 ))
 
 echo "EVENT: Blinde Kuh!"
 
-title=Blinde Kuh!
+title="Blinde Kuh!"
 subtitle="Ein Teamspieler ist 5 Minuten lang blind"
 $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"$title\", \"color\":\"red\"}" "title @a subtitle {\"text\":\"$subtitle\"}"
 
