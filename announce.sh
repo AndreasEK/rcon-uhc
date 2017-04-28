@@ -1,18 +1,19 @@
 #!/bin/bash
 
 #########################################################
-#                     announce.sh					    #
-#													    #
+#                     announce.sh                       #
+#                                                       #
 # Announces an event with the given title and subtitle  #
 # in the given respective colours, for the given time   #
-# in seconds.										    #
-#													    #
-# Arguments - for now all arguments are mandatory:	    #
-#	title			- title								#
-#	titlecolour		- title colour						#
-#	subtitle 		- subtitle							#
-#	subtitlecolour	- subtitle colour					#
-#	display time	- display time						#
+# in seconds.                                           #
+#                                                       #
+# Arguments - for now all arguments are mandatory:      #
+#   title          - title                              #
+#   titlecolour    - title colour                       #
+#   subtitle       - subtitle                           #
+#   subtitlecolour - subtitle colour                    #
+#   display time   - display time                       #
+#                                                       #
 #########################################################
 
 source env.sh
