@@ -12,22 +12,13 @@ sleep $(($INTRO_LENGTH_MIN * $SECS_PER_MIN))
 $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "gamerule naturalRegeneration false" "effect @a minecraft:instant_health 5" "gamemode 0 @a" "gamerule doDaylightCycle true" "clear @a"
 $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "time set 23500"
 
-#COUNTDOWN
-#configure titles to show only for one second
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a times 0 0 20"
-for countdown in {5..1}
-do
-  $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"$countdown\"}"
-  sleep 1
-done
-#reset title to default lengths
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a reset"
+./countdown.sh
 
 #EPISODE MARKERS
 for episode in $(seq $FIRST_EPISODE $NUMBER_OF_EPISODES)
 do
    echo "Episode $episode"
-   $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"EPISODE $episode\"}"
+   $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"$EPISODE_NAME $episode\"}"
    if [ $episode -ne 1 ]
    then
       $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a subtitle {\"text\":\"$(($EPISODE_LENGTH_MIN * ( $episode - 1) )) Minuten\"}"
@@ -65,8 +56,8 @@ do
    else
       episode_effect_wait=$EFFECT_WAIT
       event=$(( $RANDOM % $number_of_events + 1 ))
-      echo "Now running: Event_"$event".sh"
-      /bin/sh "./Event_"$event".sh"
+      echo "Now running: Event "$event
+      /bin/sh "./Event_"$event"*.sh"
    fi
    
    sleep $(($EPISODE_LENGTH_MIN * $SECS_PER_MIN - $episode_effect_wait)) 
