@@ -1,17 +1,34 @@
-#!/bin/sh
+#!/bin/bash
+
+#########################################################
+#                 Event_1_Bad_Armour.sh                 #
+#                                                       #
+# One randomly selected player will receive a chest     #
+# plate with some bad, hampering statistics.            #
+#                                                       #
+# No arguments to the script.                           #
+#                                                       #
+#########################################################
+
 source env.sh
 
+# sleep for the effect wait time minus 10 seconds (for announcement and countdown)
 sleep $(( $EFFECT_WAIT - 10 ))
 
 echo "EVENT: Bad Armour"
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"Bad Armour\", \"color\":\"red\"}" "title @a subtitle {\"text\":\"Ein Spieler bekommt einen ziemlich blöden Brustpanzer.\"}"
 
-sleep 5
+# show event title and subtitle for 5 seconds
+title="Bad Armour"
+subtitle="Ein Spieler bekommt einen ziemlich blöden Brustpanzer."
+colour=red
+./announce.sh $title $colour $subtitle $colour 5
 
-./countdown.sh
+# countdown 5 seconds
+./countdown 5
 
+# run the event
 # Gibt einem Spieler eine verwunschene und recht stark abgenutze Diamant-Brustplate,
 # die nicht abgelegt werden kann (curse of binding) und bei Tod verschwindet
 # (curse of vanishing).
 # Diese Ruestung limitiert die maximalen hitpoints auf 7 Herzen, so lange sie getragen wird, und nicht durch Tod oder Abnutzung zerstoert wird.
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "/replaceitem entity @r[m=0] slot.armor.chest minecraft:diamond_chestplate 1 500 {display:{Name:\"Chest plate of weakness\"}, ench:[{id:10, lvl:1},{id:71, lvl:1}], AttributeModifiers:[{AttributeName:generic.maxHealth, Name:egal, Amount:-6, Operation:0, UUIDMost:3, UUIDLeast:3, Slot:chest}]}"
+$RCON_CMD "/replaceitem entity @r[m=0] slot.armor.chest minecraft:diamond_chestplate 1 500 {display:{Name:\"Chest plate of weakness\"}, ench:[{id:10, lvl:1},{id:71, lvl:1}], AttributeModifiers:[{AttributeName:generic.maxHealth, Name:egal, Amount:-6, Operation:0, UUIDMost:3, UUIDLeast:3, Slot:chest}]}"

@@ -23,8 +23,8 @@ fi
 
 #COUNTDOWN
 # Reset & configure event display times 
-$PY_MCRCON $SERVER_IP $RCON_PORT $PASSWD "title @a reset"
-$PY_MCRCON $SERVER_IP $RCON_PORT $PASSWD "title @a times 0 20 0"
+$RCON_CMD "title @a reset"
+$RCON_CMD "title @a times 0 20 0"
 
 #counting down
 for ((countdown = $1; countdown>= 1; countdown--))
@@ -34,5 +34,5 @@ do
 done
 
 # reset display times again - be a well-behaved citizen ;-)
-$PY_MCRCON $SERVER_IP $RCON_PORT $PASSWD "title @a reset"
+$RCON_CMD "title @a reset"
 

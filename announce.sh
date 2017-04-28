@@ -31,13 +31,13 @@ fi
 #
 
 # Reset & configure event display times 
-$PY_MCRCON $SERVER_IP $RCON_PORT $PASSWD "title @a reset"
-$PY_MCRCON $SERVER_IP $RCON_PORT $PASSWD "title @a times 0 ($5*20) 0"
+$RCON_CMD "title @a reset"
+$RCON_CMD "title @a times 0 ($5*20) 0"
 
 # display title and subtitle 
-$PY_MCRCON $SERVER_IP $RCON_PORT $PASSWD "title @a title {\"text\":\"$1\", \"color\":\"$2\"}" "title @a subtitle {\"text\":\"$3\",\"color\":\"$4\"}"
+$RCON_CMD "title @a title {\"text\":\"$1\", \"color\":\"$2\"}" "title @a subtitle {\"text\":\"$3\",\"color\":\"$4\"}"
 sleep $5
 
 # reset display times again - be a well-behaved citizen ;-)
-$PY_MCRCON $SERVER_IP $RCON_PORT $PASSWD "title @a reset"
+$RCON_CMD "title @a reset"
 
