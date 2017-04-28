@@ -20,7 +20,8 @@ source env.sh
 #
 # Basic command line arguments check
 #
-if [ $# -ne 5 ] then
+if [ $# -ne 5 ]
+then
 	echo "Usage: announce.sh title colour subtitle colour displaytime"
 	exit 255
 fi
