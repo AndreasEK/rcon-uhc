@@ -17,7 +17,7 @@ sleep $(( $EFFECT_WAIT - 10 ))
 echo "EVENT: Güldene Äpfel"
 
 # show event title and subtitle for 5 seconds
-./announce.sh "Güldene Äpfel" yellow "Ein goldener Apfel für einen Spieler pro Team" yellow 5
+./announce.sh "Güldene Äpfel" yellow "Ein goldener Apfel für einen Spieler pro Team" white 5
 
 # countdown 5 seconds
 ./countdown.sh 5

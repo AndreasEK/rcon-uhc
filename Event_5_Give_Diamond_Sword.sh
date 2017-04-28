@@ -18,7 +18,7 @@ sleep $(( $EFFECT_WAIT - 10 ))
 echo "EVENT: Diamantschwert"
 
 # show event title and subtitle for 5 seconds
-./announce.sh "Bling Bling!" green "Ein Diamantschwert für einen Spieler pro Team" green 5
+./announce.sh "Bling Bling!" green "Ein Diamantschwert für einen Spieler pro Team" white 5
 
 # countdown 5 seconds
 ./countdown.sh 5
