@@ -14,7 +14,8 @@ sleep $EFFECT_WAIT
 
 # First, filtering live teams
 declare -a liveTeams
-for team in "${TEAMS[@]}"
+teams=(blue gold green aqua red yellow light_purple dark_blue)
+for team in "${teams[@]}"
 do
     teamPlayers=$( $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "scoreboard teams list $team" )
     if [[ $teamPlayers =~ Showing ]]; then
