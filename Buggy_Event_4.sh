@@ -23,14 +23,14 @@ do
 done
 
 # Summon invisible armour stand to team A
-execute @p[team=$team_a] ~ ~ ~ summon ArmorStand ~ ~ ~ {Invisible:1,Invulnerable:1,Marker:1,NoGravity:1,NoAI:1,tags=["swap"]}
+$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "execute @p[team=$team_a] ~ ~ ~ summon ArmorStand ~ ~ ~ {Invisible:1,Invulnerable:1,Marker:1,NoGravity:1,NoAI:1,tags=[\"swap\"]}"
 
 # Teleport team A to team B (armour stand stays at team A's position)
-tp @p[team=$team_a] @p[team=$team_b]
+$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "tp @p[team=$team_a] @p[team=$team_b]"
 
 # Now teleport team B to armour stand (at team A's former position)
-tp @p[team=$team_b] @p[tag=swap]
+$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "tp @p[team=$team_b] @p[tag=swap]"
 
 # Remove armour stand
-kill @e[tag=swap]
+$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "kill @e[tag=swap]"
 

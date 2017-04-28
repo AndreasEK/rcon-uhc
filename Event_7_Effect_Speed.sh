@@ -15,7 +15,15 @@ source env.sh
 # sleep for the effect wait time minus 10 seconds (for announcement and countdown)
 sleep $(( $EFFECT_WAIT - 10 ))
 
+<<<<<<< HEAD
 echo "EVENT: Gewitter einen Tag lang"
+=======
+echo "EVENT: Schneller!"
+
+title=Schneller!
+subtitle="Ein Teamspieler ist einen Tag lang schneller"
+$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"$title\", \"color\":\"green\"}" "title @a subtitle {\"text\":\"$subtitle\"}"
+>>>>>>> master
 
 # show event title and subtitle for 5 seconds
 ./announce.sh "Schneller!" green "Ein Spieler pro Team ist einen Tag lang schneller" white 5

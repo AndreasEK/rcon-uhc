@@ -11,6 +11,7 @@ sleep $(($INTRO_LENGTH_MIN * $SECS_PER_MIN))
 #SETUP THE GAME
 $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "gamerule naturalRegeneration false" "effect @a minecraft:instant_health 5" "gamemode 0 @a" "gamerule doDaylightCycle true" "clear @a"
 $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "time set 23500"
+$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "scoreboard objectives add Spectate deathCount" "/scoreboard players set @a Spectate 0"
 
 ./countdown.sh
 
@@ -56,9 +57,18 @@ do
    else
       episode_effect_wait=$EFFECT_WAIT
       event=$(( $RANDOM % $number_of_events + 1 ))
-      echo "Now running: Event_"$event".sh"
-      /bin/sh "./Event_"$event".sh"
+      echo "Now running: Event "$event
+      /bin/sh "./Event_"$event"*.sh"
    fi
    
-   sleep $(($EPISODE_LENGTH_MIN * $SECS_PER_MIN - $episode_effect_wait)) 
+   # This is not perfect, the check should run in a separate thread, really,
+   # but good enough for now
+   slept=0
+   while [  $slept -lt $(( $EPISODE_LENGTH_MIN * $SECS_PER_MIN - $episode_effect_wait )) ]; do
+      echo The counter is $slept
+      $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "/gamemode 3 @p[score_Spectate_min=1,m=!3]"
+      sleep 5
+      let slept=slept+5 
+   done
+
 done
