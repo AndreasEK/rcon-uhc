@@ -18,10 +18,7 @@ sleep $(( $EFFECT_WAIT - 10 ))
 echo "EVENT: Bad Armour"
 
 # show event title and subtitle for 5 seconds
-title="Bad Armour"
-subtitle="Ein Spieler bekommt einen ziemlich blöden Brustpanzer."
-colour=red
-./announce.sh "$title" "$colour" "$subtitle" "$colour" 5
+./announce.sh "Fiese Rüstung" red "Ein Spieler bekommt einen ziemlich blöden Brustpanzer." red 5
 
 # countdown 5 seconds
 ./countdown.sh 5

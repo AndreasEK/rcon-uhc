@@ -18,9 +18,7 @@ sleep $(( $EFFECT_WAIT - 10 ))
 echo "EVENT: Tod den Mobs!"
 
 # show event title and subtitle for 5 seconds
-title="Tod den Mobs!"
-subtitle="Alle Mobs im Umkreis von 20 Blöcken um jeden Spieler sterben!"
-./announce.sh "$title" green "$subtitle" green 5
+./announce.sh "Tod den Mobs!" green "Alle Mobs im Umkreis von 20 Blöcken um jeden Spieler sterben!" green 5
 
 # countdown 5 seconds
 ./countdown.sh 5
