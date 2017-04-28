@@ -21,3 +21,7 @@ NOON_AT_EPISODE=9
 #Just for debugging
 SECS_PER_MIN=60
 EFFECT_WAIT=30
+
+# Effect and UHC statics
+TEAMS=(blue gold green aqua red yellow light_purple dark_blue)
+COLOURS=(red dark_red yellow gold green dark_green blue dark_blue aqua dark_aqua light_purple dark_purple gray dark_gray white black)

@@ -11,7 +11,6 @@ sleep $EFFECT_WAIT
 #
 # Teams zufsallig auswaehlen
 #
-teams=(blue gold green aqua red yellow light_purple dark_blue)
 RANDOM=$$$(date +%s) # Seed random generator
 
 team_a=""
