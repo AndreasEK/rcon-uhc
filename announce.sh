@@ -32,7 +32,7 @@ fi
 
 # Reset & configure event display times 
 $RCON_CMD "title @a reset"
-$RCON_CMD "title @a times 0 ($5*20) 0"
+$RCON_CMD "title @a times 0 $(($5*20)) 0"
 
 # display title and subtitle 
 $RCON_CMD "title @a title {\"text\":\"$1\", \"color\":\"$2\"}" "title @a subtitle {\"text\":\"$3\",\"color\":\"$4\"}"

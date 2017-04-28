@@ -21,10 +21,10 @@ echo "EVENT: Bad Armour"
 title="Bad Armour"
 subtitle="Ein Spieler bekommt einen ziemlich blöden Brustpanzer."
 colour=red
-./announce.sh $title $colour $subtitle $colour 5
+./announce.sh "$title" "$colour" "$subtitle" "$colour" 5
 
 # countdown 5 seconds
-./countdown 5
+./countdown.sh 5
 
 # run the event
 # Gibt einem Spieler eine verwunschene und recht stark abgenutze Diamant-Brustplate,
