@@ -56,8 +56,8 @@ do
    else
       episode_effect_wait=$EFFECT_WAIT
       event=$(( $RANDOM % $number_of_events + 1 ))
-      echo "Now running: Event_"$event".sh"
-      /bin/sh "./Event_"$event".sh"
+      echo "Now running: Event "$event
+      /bin/sh "./Event_"$event"*.sh"
    fi
    
    sleep $(($EPISODE_LENGTH_MIN * $SECS_PER_MIN - $episode_effect_wait)) 
