@@ -1,7 +1,9 @@
 #Server connection
-SERVER_IP=localhost
+SERVER_IP=37.10.98.194
+RCON_PORT=25575
 PASSWD=YOUR_RCON_PASSWORD
-MCRCON_HOME=~/Minecraft/mcrcon
+MCRCON_HOME=~/mcrcon
+PY_MCRCON=~/mcrcon/mcmanage.py
 
 #Spawn and Worldborder
 SPAWN_X=7
