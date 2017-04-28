@@ -14,7 +14,7 @@ source env.sh
 # sleep for the effect wait time minus 10 seconds (for announcement and countdown)
 sleep $(( $EFFECT_WAIT - 10 ))
 
-echo "EVENT: Bad Armour"
+echo "EVENT: Ein Bogen!"
 
 # show event title and subtitle for 5 seconds
 ./announce.sh "Ein Bogen" green "Ein Bogen für einen Spieler pro Team" green 5
