@@ -5,7 +5,7 @@
 #                                                       #
 # Runs a countdown timer on the server.                 #
 #                                                       #
-# Arguments - for now all arguments are mandatory:	    #
+# Arguments - for now all arguments are mandatory:      #
 #	numseconds - Number of seconds to count down        #
 #                                                       #
 #########################################################
