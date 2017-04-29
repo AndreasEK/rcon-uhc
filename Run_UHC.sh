@@ -20,6 +20,11 @@ source env.sh
 housekeeping() {
 	# All players with a dead count must be spectators
     $RCON_CMD "/gamemode 3 @p[score_Spectate_min=1,m=!3]"
+    # 
+    # add more housekeeping here
+    # 
+    # sleep 20 seconds
+    sleep 20
 }
 
 #
@@ -114,7 +119,7 @@ do
     # 3. - Run a random event - also in the background
     event=$(( $RANDOM % $number_of_events + 1 ))
     echo "Now running: Event "$event
-    /bin/sh "./Event_"$event"*.sh" &
+    /bin/bash "./Event_"$event"*.sh" &
 
     # 4. - Wait (sleep) until it is time for the next episode
     sleep $EPISODE_LENGTH_MIN
