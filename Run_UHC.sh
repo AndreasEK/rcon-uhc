@@ -33,8 +33,8 @@ start_shrinking() {
     $RCON_CMD "worldborder set 20 $(( $duration * $SECS_PER_MIN ))"       
     # wait before telling the players
     sleep $EFFECT_WAIT
-    $RCON_CMD "title @a title {\"text\":\"DIE WELT WIRD KLEINER\"}" \
-              "title @a subtitle {\"text\":\"Auf ${WORLDBORDER_END}x${WORLDBORDER_END} in $(( $duration )) Minuten.\"}"
+    ./announce.sh "DIE WELT WIRD KLEINER" white \
+                  "Auf ${WORLDBORDER_END}x${WORLDBORDER_END} in $(( $duration )) Minuten." white 5
 }
 
 #
@@ -49,8 +49,8 @@ high_noon() {
               "weather clear $(( $clear_weather_min * $SECS_PER_MIN ))" 
     # wait before telling the players
     sleep $EFFECT_WAIT
-    $RCON_CMD "title @a title {\"text\":\"HIGH NOON\"}" \
-              "title @a subtitle {\"text\":\"Ab jetzt ist es immer 12 Uhr mittags!\"}"
+    ./announce.sh "HIGH NOON" white \
+                  "Ab jetzt ist es immer 12 Uhr mittags!" white 5
 }
 
 ############################################################
