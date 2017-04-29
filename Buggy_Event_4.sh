@@ -13,6 +13,32 @@ sleep $EFFECT_WAIT
 #
 RANDOM=$$$(date +%s) # Seed random generator
 
+# Filtering live teams
+declare -a liveTeams
+for team in "${TEAMS[@]}"
+do
+    teamPlayers=$( $RCON_CMD "scoreboard teams list $team" )
+    echo "1. teamplayers=" $teamPlayers
+    if [[ $teamPlayers =~ Showing ]]; then
+        liveTeams+=( "$team" )
+    fi
+done
+
+echo "Live teams are:"
+for team in "${liveTeams[@]}"; do
+        echo "- " $team
+done
+
+if [ ${#liveTeams[@]} <= 2 ]; then
+    echo "Less than 2 teams available, aborting."
+    exit
+fi
+
+echo "Exiting for debugging purposes"
+exit
+
+
+
 team_a=""
 team_b=""
 # randomly select _different_ teams
