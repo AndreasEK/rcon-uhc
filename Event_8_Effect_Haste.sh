@@ -1,19 +1,37 @@
-#!/bin/sh
+#!/bin/bash
+
+############################################################
+#                 Event_8_Effect_Haste.sh                  #
+#                                                          #
+# One random player per team will be in haste for a whole  #
+# day.                                                     #
+#                                                          #
+# Arguments:                                               #
+#   [any] - any argument to the script causes skipping     #
+#           sleeping, announcement and countdown.          #
+#           Very handy for testing purposes.               #
+#                                                          #
+############################################################
+
 source env.sh
 
-sleep $(( $EFFECT_WAIT - 10 ))
+if [ -z $1 ]; then
 
-echo "EVENT: Hektik!"
+    # sleep - Event & Day synch
+    sleep $(( $EFFECT_WAIT - 10 ))
 
-title=Hektik!
-subtitle="Ein Teamspieler ist einen Tag ein Eile"
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"$title\", \"color\":\"green\"}" "title @a subtitle {\"text\":\"$subtitle\"}"
+    # Announce and countdown
+    echo "EVENT: Hektik!"
+    ./announce.sh "Hektik!" green \
+                  "Ein Teamspieler ist einen Tag ein Eile" white 5
+    ./countdown.sh 5
 
-sleep 5
+fi
 
-./countdown.sh
-
-for team in blue gold green aqua red yellow light_purple dark_blue
+#
+# run the event
+#
+for team in $TEAMS
 do
-	$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "effect @r[team=$team,m=0] minecraft:haste 1200 2"
+	$RCON_CMD "effect @r[team=$team,m=0] minecraft:haste 1200 2"
 done

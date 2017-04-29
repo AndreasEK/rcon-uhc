@@ -1,19 +1,36 @@
-#!/bin/sh
+#!/bin/bash
+
+############################################################
+#                Event_15_Effect_Blindness.sh              #
+#                                                          #
+# One random player per team will be blind for 5 minutes.  #
+#                                                          #
+# Arguments:                                               #
+#   [any] - any argument to the script causes skipping     #
+#           sleeping, announcement and countdown.          #
+#           Very handy for testing purposes.               #
+#                                                          #
+############################################################
+
 source env.sh
 
-sleep $(( $EFFECT_WAIT - 10 ))
+if [ -z $1 ]; then
 
-echo "EVENT: Blinde Kuh!"
+    # sleep - Event & Day synch
+    sleep $(( $EFFECT_WAIT - 10 ))
 
-title="Blinde Kuh!"
-subtitle="Ein Teamspieler ist 5 Minuten lang blind"
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"$title\", \"color\":\"red\"}" "title @a subtitle {\"text\":\"$subtitle\"}"
+    # Announce and countdown
+    echo "EVENT: Blinde Kuh!"
+    ./announce.sh "Blinde Kuh!" red \
+                  "Ein Teamspieler ist 5 Minuten lang blind" white 5
+    ./countdown.sh 5
 
-sleep 5
+fi
 
-./countdown.sh
-
-for team in blue gold green aqua red yellow light_purple dark_blue
+#
+# run the event
+#
+for team in $TEAMS
 do
-	$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "effect @r[team=$team,m=0] minecraft:blindness 300 2"
+	$RCON_CMD "effect @r[team=$team,m=0] minecraft:blindness 300 2"
 done

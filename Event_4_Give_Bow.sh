@@ -1,26 +1,30 @@
 #!/bin/bash
 
-#########################################################
-#                  Event_4_Give_Bow.sh                  #
-#                                                       #
-# Give one randomly picked player per team a bow.       #
-#                                                       #
-# No arguments to the script.                           #
-#                                                       #
-#########################################################
+############################################################
+#                    Event_4_Give_Bow.sh                   #
+#                                                          #
+# Give one randomly picked player per team a bow.          #
+#                                                          #
+# Arguments:                                               #
+#   [any] - any argument to the script causes skipping     #
+#           sleeping, announcement and countdown.          #
+#           Very handy for testing purposes.               #
+#                                                          #
+############################################################
 
 source env.sh
 
-# sleep for the effect wait time minus 10 seconds (for announcement and countdown)
-sleep $(( $EFFECT_WAIT - 10 ))
+if [ -z $1 ]; then
 
-echo "EVENT: Ein Bogen!"
+    # sleep - Event & Day synch
+    sleep $(( $EFFECT_WAIT - 10 ))
 
-# show event title and subtitle for 5 seconds
-./announce.sh "Ein Bogen" green "Ein Bogen für einen Spieler pro Team" white 5
+    # Announce and countdown
+    echo "EVENT: Ein Bogen!"
+    ./announce.sh "Ein Bogen" green "Ein Bogen für einen Spieler pro Team" white 5
+    ./countdown.sh 5
 
-# countdown 5 seconds
-./countdown.sh 5
+fi
 
 #
 # run the event

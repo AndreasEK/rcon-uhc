@@ -1,19 +1,36 @@
-#!/bin/sh
+#!/bin/bash
+
+############################################################
+#               Event_10_Effect_Invisibility.sh            #
+#                                                          #
+# All players will be invisible for 10 minutes.            #
+#                                                          #
+# Arguments:                                               #
+#   [any] - any argument to the script causes skipping     #
+#           sleeping, announcement and countdown.          #
+#           Very handy for testing purposes.               #
+#                                                          #
+############################################################
+
 source env.sh
 
-sleep $(( $EFFECT_WAIT - 10 ))
+if [ -z $1 ]; then
 
-echo "EVENT: Unsichtbarkeit!"
+    # sleep - Event & Day synch
+    sleep $(( $EFFECT_WAIT - 10 ))
 
-title=Huch!
-subtitle="Alle Spieler sind 10 Minuten unsichtbar"
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"$title\", \"color\":\"green\"}" "title @a subtitle {\"text\":\"$subtitle\"}"
+    # Announce and countdown
+    echo "EVENT: Unsichtbarkeit!"
+    ./announce.sh "Huch!" yellow \
+                  "Alle Spieler sind 10 Minuten unsichtbar" white 5
+    ./countdown.sh 5
 
-sleep 5
+fi
 
-./countdown.sh
-
-for team in blue gold green aqua red yellow light_purple dark_blue
+#
+# run the event
+#
+for team in $TEAMS
 do
-	$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "effect @a[team=$team,m=0] minecraft:invisibility 600 2"
+	$RCON_CMD "effect @a[team=$team,m=0] minecraft:invisibility 600 2"
 done

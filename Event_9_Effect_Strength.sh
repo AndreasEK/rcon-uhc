@@ -1,19 +1,37 @@
-#!/bin/sh
+#!/bin/bash
+
+############################################################
+#                 Event_9_Effect_Strength.sh               #
+#                                                          #
+# One random player per team will be stronger for a whole  #
+# day.                                                     #
+#                                                          #
+# Arguments:                                               #
+#   [any] - any argument to the script causes skipping     #
+#           sleeping, announcement and countdown.          #
+#           Very handy for testing purposes.               #
+#                                                          #
+############################################################
+
 source env.sh
 
-sleep $(( $EFFECT_WAIT - 10 ))
+if [ -z $1 ]; then
 
-echo "EVENT: Stark!"
+    # sleep - Event & Day synch
+    sleep $(( $EFFECT_WAIT - 10 ))
 
-title=Stark!
-subtitle="Ein Teamspieler ist einen Tag ganz stark"
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"$title\", \"color\":\"green\"}" "title @a subtitle {\"text\":\"$subtitle\"}"
+    # Announce and countdown
+    echo "EVENT: Stark!"
+    ./announce.sh "Stark!" green \
+                  "Ein Teamspieler ist einen Tag ganz stark." white 5
+    ./countdown.sh 5
 
-sleep 5
+fi
 
-./countdown.sh
-
-for team in blue gold green aqua red yellow light_purple dark_blue
+#
+# run the event
+#
+for team in $TEAMS
 do
-	$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "effect @r[team=$team,m=0] minecraft:strength 1200 2"
+	$RCON_CMD "effect @r[team=$team,m=0] minecraft:strength 1200 2"
 done

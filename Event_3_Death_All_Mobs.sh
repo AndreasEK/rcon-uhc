@@ -6,22 +6,27 @@
 # All mobs within a radius of 20 blocks around each player #
 # are killed - leaving xp points behind for pickup. :)     #
 #                                                          #
-# No arguments to the script.                              #
+# Arguments:                                               #
+#   [any] - any argument to the script causes skipping     #
+#           sleeping, announcement and countdown.          #
+#           Very handy for testing purposes.               #
 #                                                          #
 ############################################################
 
 source env.sh
 
-# sleep for the effect wait time minus 10 seconds (for announcement and countdown)
-sleep $(( $EFFECT_WAIT - 10 ))
+if [ -z $1 ]; then
 
-echo "EVENT: Tod den Mobs!"
+    # sleep - Event & Day synch
+    sleep $(( $EFFECT_WAIT - 10 ))
 
-# show event title and subtitle for 5 seconds
-./announce.sh "Tod den Mobs!" green "Alle Mobs im Umkreis von 20 Blöcken um jeden Spieler sterben!" white 5
+    # Announce and countdown
+    echo "EVENT: Tod den Mobs!"
+    ./announce.sh "Tod den Mobs!" green \
+                  "Alle Mobs im Umkreis von 20 Blöcken um jeden Spieler sterben!" white 5
+    ./countdown.sh 5
 
-# countdown 5 seconds
-./countdown.sh 5
+fi
 
 #
 # run the event

@@ -5,22 +5,27 @@
 #                                                          #
 # Give one randomly picked player per team a golden apple. #
 #                                                          #
-# No arguments to the script.                              #
+# Arguments:                                               #
+#   [any] - any argument to the script causes skipping     #
+#           sleeping, announcement and countdown.          #
+#           Very handy for testing purposes.               #
 #                                                          #
 ############################################################
 
 source env.sh
 
-# sleep for the effect wait time minus 10 seconds (for announcement and countdown)
-sleep $(( $EFFECT_WAIT - 10 ))
+if [ -z $1 ]; then
 
-echo "EVENT: Güldene Äpfel"
+    # sleep - Event & Day synch
+    sleep $(( $EFFECT_WAIT - 10 ))
 
-# show event title and subtitle for 5 seconds
-./announce.sh "Güldene Äpfel" yellow "Ein goldener Apfel für einen Spieler pro Team" white 5
+    # Announce and countdown
+    echo "EVENT: Güldene Äpfel"
+    ./announce.sh "Güldene Äpfel" red \
+	              "Ein Spieler bekommt einen ziemlich blöden Brustpanzer." white 5
+    ./countdown.sh 5
 
-# countdown 5 seconds
-./countdown.sh 5
+fi
 
 #
 # run the event

@@ -1,19 +1,37 @@
-#!/bin/sh
+#!/bin/bash
+
+############################################################
+#                 Event_14_Effect_Nausea.sh                #
+#                                                          #
+# One random player per team will feel nauseous for 5      #
+# minutes.                                                 #
+#                                                          #
+# Arguments:                                               #
+#   [any] - any argument to the script causes skipping     #
+#           sleeping, announcement and countdown.          #
+#           Very handy for testing purposes.               #
+#                                                          #
+############################################################
+
 source env.sh
 
-sleep $(( $EFFECT_WAIT - 10 ))
+if [ -z $1 ]; then
 
-echo "EVENT: Örks!"
+    # sleep - Event & Day synch
+    sleep $(( $EFFECT_WAIT - 10 ))
 
-title=Örks!
-subtitle="Einem Teamspieler ist 5 Minuten lang schwindelig"
-$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"$title\", \"color\":\"red\"}" "title @a subtitle {\"text\":\"$subtitle\"}"
+    # Announce and countdown
+    echo "EVENT: Örks!"
+    ./announce.sh "Örks!" red \
+                  "Einem Teamspieler ist 5 Minuten lang schwindelig" white 5
+    ./countdown.sh 5
 
-sleep 5
+fi
 
-./countdown.sh
-
-for team in blue gold green aqua red yellow light_purple dark_blue
+#
+# run the event
+#
+for team in $TEAMS
 do
-	$MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "effect @r[team=$team,m=0] minecraft:nausea 300 2"
+	$RCON_CMD "effect @r[team=$team,m=0] minecraft:nausea 300 2"
 done
