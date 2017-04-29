@@ -3,7 +3,7 @@ SERVER_IP=192.168.1.130
 RCON_PORT=25575
 PASSWD="5}.4p[X/ONp445H"
 MCRCON_HOME=~/mcrcon
-PY_MCRCON=~/mcrcon/mcmanage.py
+PY_MCRCON=./mcrcon/mcmanage.py
 RCON_CMD="$PY_MCRCON $SERVER_IP $RCON_PORT $PASSWD"
 
 #Spawn and Worldborder
