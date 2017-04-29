@@ -49,7 +49,6 @@ high_noon() {
               "weather clear $(( $clear_weather_min * $SECS_PER_MIN ))" 
     # wait before telling the players
     sleep $EFFECT_WAIT
-    slept=$(( slept + EFFECT_WAIT ))
     $RCON_CMD "title @a title {\"text\":\"HIGH NOON\"}" \
               "title @a subtitle {\"text\":\"Ab jetzt ist es immer 12 Uhr mittags!\"}"
 }
