@@ -11,6 +11,7 @@ sleep $EFFECT_WAIT
 #
 # Teams zufsallig auswaehlen
 #
+<<<<<<< HEAD
 RANDOM=$$$(date +%s) # Seed random generator
 
 # Filtering live teams
@@ -39,13 +40,36 @@ exit
 
 
 
+=======
+
+# First, filtering live teams
+declare -a liveTeams
+teams=(blue gold green aqua red yellow light_purple dark_blue)
+for team in "${teams[@]}"
+do
+    teamPlayers=$( $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "scoreboard teams list $team" )
+    if [[ $teamPlayers =~ Showing ]]; then
+        liveTeams+=( "$team" )
+    fi
+done
+
+# Proceed only if 2 or more teams have players
+if [ ${#liveTeams[@]} <= 2 ]; then
+    echo "Less than 2 teams available, aborting."
+    exit 255
+fi
+
+# Prepare random seed generator, and target teams variables
+RANDOM=$$$(date +%s) # Seed random generator
+>>>>>>> master
 team_a=""
 team_b=""
+
 # randomly select _different_ teams
 while [ $team_a = $team_b ]
 do
-    team_a=${teams[$RANDOM % ${#teams[@]} ]}
-    team_b=${teams[$RANDOM % ${#teams[@]} ]}
+    team_a=${liveTeams[$RANDOM % ${#liveTeams[@]} ]}
+    team_b=${liveTeams[$RANDOM % ${#liveTeams[@]} ]}
 done
 
 # Summon invisible armour stand to team A
