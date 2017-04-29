@@ -12,9 +12,10 @@
 
 source env.sh
 
-# sleep for the effect wait time minus 10 seconds (for announcement and countdown)
+# sleep - Event & Day synch
 sleep $(( $EFFECT_WAIT - 10 ))
 
+# Announce and countdown
 echo "EVENT: Bad Armour"
 ./announce.sh "Fiese Rüstung" red \
 			  "Ein Spieler bekommt einen ziemlich blöden Brustpanzer." white 5
