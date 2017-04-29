@@ -15,10 +15,10 @@ source env.sh
 # sleep for the effect wait time minus 10 seconds (for announcement and countdown)
 sleep $(( $EFFECT_WAIT - 10 ))
 
-<<<<<<< HEAD
-echo "EVENT: Diamantschwert"
-=======
 echo "EVENT: Ein Diamantschwert"
+
+
+
 $MCRCON_HOME/mcrcon -H $SERVER_IP -p $PASSWD "title @a title {\"text\":\"Bling Bling\", \"color\":\"green\"}" "title @a subtitle {\"text\":\"Ein Diamantschwert für einen Spieler pro Team\"}"
 >>>>>>> master
 

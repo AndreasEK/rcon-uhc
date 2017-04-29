@@ -16,11 +16,8 @@ source env.sh
 sleep $(( $EFFECT_WAIT - 10 ))
 
 echo "EVENT: Bad Armour"
-
-# show event title and subtitle for 5 seconds
-./announce.sh "Fiese Rüstung" red "Ein Spieler bekommt einen ziemlich blöden Brustpanzer." white 5
-
-# countdown 5 seconds
+./announce.sh "Fiese Rüstung" red \
+			  "Ein Spieler bekommt einen ziemlich blöden Brustpanzer." white 5
 ./countdown.sh 5
 
 #
