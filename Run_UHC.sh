@@ -65,7 +65,10 @@ high_noon() {
 # 
 # Events preparation
 # 
-number_of_events=`ls -Ub1 | grep ^Event_ | wc -l`
+RANDOM=$$$(date +%s)	# seeding $RANDOM
+shopt -s nullglob		# force glob results to be empty rather than nil 
+events=(Event_*.sh)		# using bash's glob feature
+
 # start housekeeping
 housekeeping &
 housekeeping_pid=$!
@@ -109,7 +112,7 @@ do
        $RCON_CMD "title @a subtitle {\"text\":\"$(($EPISODE_LENGTH_MIN * ( $episode - 1) )) Minuten\"}"
     fi
 
-	# 2. - Fire off border shrinking, or high noon in the background    
+	# 2. - Fire off either border shrinking, or high noon, in the background    
     if [ $episode -eq $SHRINK_AT_EPISODE ]; then
     	start_shrinking & # world border starts shrinking
     elif [ $episode -eq $NOON_AT_EPISODE ]; then
@@ -117,9 +120,9 @@ do
     fi
 
     # 3. - Run a random event - also in the background
-    event=$(( $RANDOM % $number_of_events + 1 ))
+	event=${events[$RANDOM % ${#events[@]}]}
     echo "Now running: Event "$event
-    /bin/bash "./Event_"$event"*.sh" &
+    /bin/bash "$event" &
 
     # 4. - Wait (sleep) until it is time for the next episode
     sleep $EPISODE_LENGTH_MIN
