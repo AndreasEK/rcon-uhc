@@ -1,4 +1,6 @@
-#!/usr/bin/python3
+#!/usr/local/bin/python3
+
+# On OS X python3 resides in /usr/local/bin
 
 import mcrcon
 import time
